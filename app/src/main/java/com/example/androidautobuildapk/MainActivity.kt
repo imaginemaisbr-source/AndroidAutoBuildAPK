@@ -1,57 +1,21 @@
 package com.example.androidautobuildapk
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MainScreen()
-        }
-    }
-}
+        setContentView(R.layout.activity_main)
 
-@Composable
-fun MainScreen() {
-    var status by remember { mutableStateOf("Parado") }
+        val statusText = findViewById<TextView>(R.id.statusText)
+        val startButton = findViewById<Button>(R.id.startButton)
 
-    MaterialTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-
-                Text(
-                    text = "Android Tasker Controller",
-                    fontSize = 22.sp
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                Button(onClick = {
-                    status = "Automação iniciada"
-                }) {
-                    Text("Iniciar Automação")
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "Status: $status",
-                    fontSize = 16.sp
-                )
-            }
+        startButton.setOnClickListener {
+            statusText.text = "Automação iniciada"
         }
     }
 }
